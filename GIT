@@ -1,0 +1,42 @@
+
+GIT
+------
+
+--> How to use git patch system to apply changes into another folder:-
+
+git apply -p3 --directory='left/  qwerty/foo'  0001-important-changes.patch
+
+-p3 removes 3 first folder parts from header. Modyfying from a/right/bar/a.txt into a.txt.
+--directory='left/qwerty/foo' is a prefix added to each header. Modifying from a.txt to left/qwerty/foo/a.txt
+
+
+https://blog.soltysiak.it/en/2017/08/how-to-use-git-patch-system-to-apply-changes-into-another-folder-structure/
+
+
+GIT/REPO
+----------------
+
+--> Unable to push form one repo
+
+$ git format-patch <commit-id of previous commit>
+$ git clone cmf/meta-rpi -b rdk/yocto-dunfell-upgrade
+$ git am 0001*.patch
+$ git push origin HEAD:refs/for/rdk/yocto-dunfell-upgrade
+
+--> cherry-pick pull requests
+
+$ cd meta-wpe
+$ git remote add supreeth https://github.com/supreeth/meta-wpe
+$ git fetch supreeth --all
+$ git cherry-pick <commit id>
+
+--> rebase
+
+$ git fetch <remote> dunfell
+$ git checkout rdk/yocto-dunfell-upgrade
+$ git rebase <remote>/dunfell
+
+
+--> Search all the layers
+
+repo forall -c 'git log --grep="libav" --after="2020-01-01 00:00:00" ; echo "${REPO_PROJECT}"'
